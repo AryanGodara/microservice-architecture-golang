@@ -1,0 +1,7 @@
+project/db-data
+microservice_architecture.code-workspace
+mail-service/mailerApp
+logger-service/loggerServiceApp
+listener-service/listenerApp
+front-end/frontApp
+broker-service/brokerApp
