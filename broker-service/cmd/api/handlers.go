@@ -74,20 +74,24 @@ listener service.
 */
 // func (app *Config) logItem(w http.ResponseWriter, entry LogPayload) {
 func (app *Config) _(w http.ResponseWriter, entry LogPayload) {
+	// convert the struct to json format
 	jsonData, _ := json.MarshalIndent(entry, "", "\t")
 
 	logServiceURL := "http://logger-service/log"
 
+	// Create a new http request
 	request, err := http.NewRequest("POST", logServiceURL, bytes.NewBuffer(jsonData))
 	if err != nil {
 		app.errorJSON(w, err)
 		return
 	}
 
+	// set a header for the request
 	request.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
+	client := &http.Client{} // create a new http-client
 
+	// get response by sending the http request
 	response, err := client.Do(request)
 	if err != nil {
 		app.errorJSON(w, err)
@@ -100,6 +104,8 @@ func (app *Config) _(w http.ResponseWriter, entry LogPayload) {
 		return
 	}
 
+	// we reach this stage, if we successully sent POST request to logger-service
+	// and got back valid response.
 	var payload jsonResponse
 	payload.Error = false
 	payload.Message = "logged"
@@ -248,8 +254,8 @@ func (app *Config) logItemViaRPC(w http.ResponseWriter, l LogPayload) {
 	}
 
 	rpcPayload := RPCPayload{
-		Name: l.Name,
-		Data: l.Data,
+		Name: string(l.Name),
+		Data: string(l.Data),
 	}
 
 	var result string
