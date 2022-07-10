@@ -56,8 +56,8 @@ func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, header
 	return nil
 }
 
-// errorJSON takes an error, and optionally a response status code, and generates and sends
-// a json error response
+// errorJSON takes an error, and optionally a response status code, and generates and
+// sends a json error response
 func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) error {
 	statusCode := http.StatusBadRequest
 

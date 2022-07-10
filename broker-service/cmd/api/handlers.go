@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"net/rpc"
 )
@@ -39,7 +40,10 @@ func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
 		Message: "Hit the broker",
 	}
 
-	_ = app.writeJSON(w, http.StatusOK, payload)
+	err := app.writeJSON(w, http.StatusOK, payload)
+	if err != nil {
+		log.Println("Error while writing json to response in Broker handler: ", err.Error())
+	}
 }
 
 // HandleSubmission is the main point of entry into the broker. It accepts a JSON
