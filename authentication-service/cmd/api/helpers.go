@@ -8,9 +8,9 @@ import (
 )
 
 type jsonResponse struct {
-	Error bool `json:"error"`
+	Error   bool   `json:"error"`
 	Message string `json:"message"`
-	Data any `json:"data,omitempty"`
+	Data    any    `json:"data,omitempty"`
 }
 
 // readJSON tries to read the body of a request and converts it into JSON
@@ -20,7 +20,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
 
 	dec := json.NewDecoder(r.Body)
-	err := dec.Decode(data)
+	err := dec.Decode(data) // reads teh json data from dec, writes it to 'data'
 	if err != nil {
 		return err
 	}
