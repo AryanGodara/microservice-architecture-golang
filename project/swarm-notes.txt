@@ -1,0 +1,33 @@
+aryan@aryan-ZenBook-UX425JA-UX425JA:~/go projects/microservice_architecture/project$ docker swarm init
+
+Swarm initialized: current node (6n5yzt6l280b7jxnr902wwlwc) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-15mxjud3zvv41o7v218o7mfyxyjh4o19l6kc8o2ydv3tlhhntj-9sna24m9gst0tp7of3aaf6rdl 10.184.9.156:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+#####################################
+
+//todo: Deploy the docker swarm
+aryan@aryan-ZenBook-UX425JA-UX425JA:~/go projects/microservice_architecture/project$ docker stack deploy -c swarm.yml myapp
+
+#####################################
+
+//todo: Remove entire docker swarm
+aryan@aryan-ZenBook-UX425JA-UX425JA:~/go projects/microservice_architecture/project$ docker stack rm myapp
+
+#####################################
+
+//todo: Remove service(s)
+docker swarm rm 235kb354k 43k5jh34k5 34k5jg345lkjg
+
+#####################################
+
+//todo: Stop service(s) [Not delete]
+docker service scale myapp_broker-service=0 (scale down to 0 instances)
+
+#####################################
+
+//todo: We're done with this server, and want to leave the swarm
