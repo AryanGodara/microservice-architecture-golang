@@ -4,10 +4,14 @@ version: '3'
 # have to change the image: <name> part to whatever your image names are
 
 services:
+  front-end:
+    image:aryangodara/front-end:1.0.0
+    deploy:
+      mode: replicated
+      replicas: 1
+
   broker-service:
-    image: tsawler/broker-service:1.0.0
-    ports:
-      - "8080:80"
+    image: tsawler/broker-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1

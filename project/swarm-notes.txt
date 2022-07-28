@@ -31,3 +31,4 @@ docker service scale myapp_broker-service=0 (scale down to 0 instances)
 #####################################
 
 //todo: We're done with this server, and want to leave the swarm
+docker stack rm myapp (check this command from video once. Not verified)
