@@ -32,3 +32,16 @@ docker service scale myapp_broker-service=0 (scale down to 0 instances)
 
 //todo: We're done with this server, and want to leave the swarm
 docker stack rm myapp (check this command from video once. Not verified)
+
+#################################################################################
+
+aryan@aryan-ZenBook-UX425JA-UX425JA:~/go projects/microservice_architecture/project$ docker swarm init --advertise-addr 127.0.0.1
+Swarm initialized: current node (svmdb445pcrmerpnxps9j8kma) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-64qo77btk2zgrk9svcd498z3tabugmaoykvpfv85b5rykv6ydq-3f5yk49gjbtm4vmj7r61o6r2t 127.0.0.1:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+#################################################################################
