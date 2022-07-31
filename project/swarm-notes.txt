@@ -45,3 +45,26 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 
 #################################################################################
+
+After creating linode node, and domain on godaddy.com
+
+To start the ssh to the linode :-
+ssh aryan@172.105.52.61
+
+Then, steps to add name, etc to the node.
+
+Now, to run docker swarm on this :-
+
+######
+
+aryan@node-1:~$ sudo docker swarm init --advertise-addr 172.105.52.61
+Swarm initialized: current node (ojpzrl4d59lu7nnrnicy5o5i0) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-31n5ch7sijyb5flq46dextveljp4swyjem06tmxw449cqyur6l-djeozuv896lcrthvek39ovbwh 172.105.52.61:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+aryan@node-1:~$ 
+###

@@ -35,10 +35,9 @@ func render(w http.ResponseWriter, t string) {
 	var templateSlice []string
 	templateSlice = append(templateSlice, fmt.Sprintf("templates/%s", t))
 
-	templateSlice = append(templateSlice, partials...)
-	// for _, x := range partials {
-	// 	templateSlice = append(templateSlice, x)
-	// }
+	for _, x := range partials {
+		templateSlice = append(templateSlice, x)
+	}
 
 	tmpl, err := template.ParseFS(templateFS, templateSlice...)
 	if err != nil {
@@ -49,6 +48,7 @@ func render(w http.ResponseWriter, t string) {
 	var data struct {
 		BrokerURL string
 	}
+
 	data.BrokerURL = os.Getenv("BROKER_URL")
 
 	if err := tmpl.Execute(w, data); err != nil {
