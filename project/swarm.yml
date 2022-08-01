@@ -25,19 +25,19 @@ services:
       BROKER_URL: "http://backend"
 
   broker-service:
-    image: tsawler/broker-service:1.0.1
+    image: aryangodara/broker-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
 
   listener-service:
-    image: tsawler/listener-service:1.0.0
+    image: aryangodara/listener-service:1.0.0
     deploy:
       mode: replicated
       replicas: 1
 
   authentication-service:
-    image: tsawler/authentication-service:1.0.0
+    image: aryangodara/authentication-service:1.0.0
     deploy:
       mode: replicated
       replicas: 1

@@ -6,6 +6,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      placement:
+        constraints:
+          - node.hostname == node-1
     ports:
       - "80:80"
       - "443:443"
@@ -14,27 +17,27 @@ services:
       - ./caddy_config:/config
 
   front-end:
-    image: aryangodara/front-end:1.0.1
+    image: aryangodara/front-end:1.0.2
     deploy:
       mode: replicated
       replicas: 1
     environment:
-      BROKER_URL: "http://backend"
+      BROKER_URL: "http://broker.learnhost.co.in"
 
   broker-service:
-    image: tsawler/broker-service:1.0.1
+    image: aryangodara/broker-service:1.0.2
     deploy:
       mode: replicated
       replicas: 1
 
   listener-service:
-    image: tsawler/listener-service:1.0.0
+    image: aryangodara/listener-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
 
   authentication-service:
-    image: tsawler/authentication-service:1.0.0
+    image: aryangodara/authentication-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -42,13 +45,13 @@ services:
       DSN: "host=postgres port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
 
   logger-service:
-    image: tsawler/logger-service:1.0.0
+    image: aryangodara/logger-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
 
   mailer-service:
-    image: tsawler/mail-service:1.0.0
+    image: aryangodara/mail-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -65,21 +68,27 @@ services:
   rabbitmq:
     image: 'rabbitmq:3.9-alpine'
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
 
   mailhog:
     image: 'mailhog/mailhog:latest'
     ports:
       - "8025:8025"
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
 
   mongo:
     image: 'mongo:4.2.17-bionic'
     ports:
       - "27017:27017"
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == node-1
     environment:
       MONGO_INITDB_DATABASE: logs
       MONGO_INITDB_ROOT_USERNAME: admin
@@ -94,6 +103,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      placement:
+        constraints:
+          - node.hostname == node-1
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password

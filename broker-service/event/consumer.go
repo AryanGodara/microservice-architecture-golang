@@ -11,7 +11,7 @@ import (
 )
 
 type Consumer struct {
-	conn      *amqp.Connection
+	conn *amqp.Connection
 	queueName string
 }
 
@@ -22,7 +22,7 @@ func NewConsumer(conn *amqp.Connection) (Consumer, error) {
 
 	err := consumer.setup()
 	if err != nil {
-		return Consumer{}, err // return an empty consumer
+		return Consumer{}, err
 	}
 
 	return consumer, nil
@@ -47,7 +47,6 @@ func (consumer *Consumer) Listen(topics []string) error {
 	if err != nil {
 		return err
 	}
-
 	defer ch.Close()
 
 	q, err := declareRandomQueue(ch)
@@ -84,7 +83,7 @@ func (consumer *Consumer) Listen(topics []string) error {
 		}
 	}()
 
-	fmt.Printf("Waiting for message on [Exchange, Queue] [logs_topic, %s]\n", q.Name)
+	fmt.Printf("Waiting for message [Exchange, Queue] [logs_topic, %s]\n", q.Name)
 	<-forever
 
 	return nil
@@ -105,7 +104,6 @@ func handlePayload(payload Payload) {
 	// you can have as many cases as you want, as long as you write the logic
 
 	default:
-		// log whatever we get
 		err := logEvent(payload)
 		if err != nil {
 			log.Println(err)
@@ -136,6 +134,6 @@ func logEvent(entry Payload) error {
 	if response.StatusCode != http.StatusAccepted {
 		return err
 	}
-
+	
 	return nil
 }

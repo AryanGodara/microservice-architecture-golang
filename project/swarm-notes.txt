@@ -68,3 +68,9 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 aryan@node-1:~$ 
 ###
+
+
+
+// Updating Services :-
+docker build -f logger-service.dockerfile -t aryangodara/logger-service:1.0.1 .
+docker push aryangodara/logger-service:1.0.1

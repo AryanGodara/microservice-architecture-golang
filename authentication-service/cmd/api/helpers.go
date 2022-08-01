@@ -20,7 +20,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
 
 	dec := json.NewDecoder(r.Body)
-	err := dec.Decode(data) // reads teh json data from dec, writes it to 'data'
+	err := dec.Decode(data)
 	if err != nil {
 		return err
 	}

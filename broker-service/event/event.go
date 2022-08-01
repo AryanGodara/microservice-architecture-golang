@@ -6,23 +6,23 @@ import (
 
 func declareExchange(ch *amqp.Channel) error {
 	return ch.ExchangeDeclare(
-		"logs_topic", // name of duration
-		"topic",      // type of duration
-		true,         // is this exchange durable?
-		false,        // get rid of its, when done with it (auto-delete)?
-		false,        // is this an exchange just used internally
+		"logs_topic", // name
+		"topic",       // type
+		true,         // durable?
+		false,        // auto-deleted?
+		false,        // internal?
 		false,        // no-wait?
-		nil,          // arguments?
+		nil,          // arguements?
 	)
 }
 
 func declareRandomQueue(ch *amqp.Channel) (amqp.Queue, error) {
 	return ch.QueueDeclare(
-		"",    // name
-		false, // durable?
-		false, // delete when unused?
-		true,  // is this channel exclusive for current operations?
-		false, // no-wait?
-		nil,   // arguments?
+		"",        // name?
+		false,     // durable?
+		false,     // delete when unused?
+		true,      // exclusive?
+		false,     // no-wait?
+		nil,       // arguments?
 	)
 }
