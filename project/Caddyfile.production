@@ -21,13 +21,14 @@
 	}
 }
 
-swarm.learnhost.co.in:80 {
+swarm.learnhost.co.in {
 	encode zstd gzip
 	import static
+	import security
 
 	reverse_proxy  http://front-end:8081
 }
 
-broker.learnhost.co.in:80 {
+broker.learnhost.co.in {
 	reverse_proxy http://broker-service:8080
 }

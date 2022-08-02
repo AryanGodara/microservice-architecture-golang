@@ -2,7 +2,7 @@ version: '3'
 
 services:
   caddy:
-    image: aryangodara/micro-caddy-production:1.0.0
+    image: aryangodara/micro-caddy-production:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -22,10 +22,10 @@ services:
       mode: replicated
       replicas: 1
     environment:
-      BROKER_URL: "http://broker.learnhost.co.in"
+      BROKER_URL: "https://broker.learnhost.co.in"
 
   broker-service:
-    image: aryangodara/broker-service:1.0.2
+    image: tsawler/broker-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -37,7 +37,7 @@ services:
       replicas: 1
 
   authentication-service:
-    image: aryangodara/authentication-service:1.0.1
+    image: tsawler/authentication-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -45,7 +45,7 @@ services:
       DSN: "host=postgres port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
 
   logger-service:
-    image: aryangodara/logger-service:1.0.1
+    image: tsawler/logger-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
